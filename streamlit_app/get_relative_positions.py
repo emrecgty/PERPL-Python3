@@ -3,10 +3,12 @@ from typing import Optional
 
 # Import third-party libraries
 import numpy as np
+import streamlit as st
 
 # Import local libraries
 from get_distances import getdistances, getdistances_two_colours
 
+@st.cache(allow_output_mutation=True, show_spinner=True)
 def get_relative_positions(
                             xyzcolour_values: np.ndarray,
                             filter_dist: float,

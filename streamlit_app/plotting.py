@@ -62,7 +62,7 @@ if _platform == "darwin":
     matplotlib.use('MacOSX')
 
 
-def draw_2d_scatter_plots(xyzcolour_values, dims, info, zoom): # xyz_values
+def draw_2d_scatter_plots(xyzcolour_values, dims, zoom): # xyz_values
     """Farms out the scatter plots that need to be plotted to the draw_2d_scatter_plot
     function.
 
@@ -162,7 +162,7 @@ def draw_2col_2d_scatter_plot(xyzcolour_values,
        Nothing is returned.
     """
     fig, ax = plt.subplots(figsize=(10, 8), dpi=200, facecolor='w', edgecolor='k')
-    if info['colours_analysed'] is None:
+    if True:
         ax.scatter(xyzcolour_values[:, axes[0]], xyzcolour_values[:, axes[1]], s=1)
     else:
         scatterplot = ax.scatter(xyzcolour_values[:, axes[0]], xyzcolour_values[:, axes[1]],
