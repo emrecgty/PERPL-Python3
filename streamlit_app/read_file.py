@@ -1,9 +1,10 @@
 from io import StringIO
+from typing import List, Union
 
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import numpy as np
 
-def read_file(file: UploadedFile, errors: list = []):
+def read_file(file: List[UploadedFile], errors: list = []):
     if file.name.endswith('.npy'):
         try:
             return np.load(file.name)
@@ -28,3 +29,4 @@ def read_file(file: UploadedFile, errors: list = []):
             errors.append("Could not read file")
     else:
         errors.append('Sorry, wrong format!')
+    

@@ -35,7 +35,7 @@ with tab1:
     
     # File uploader
     try:
-        uploaded_file = st.file_uploader("Choose a file")
+        uploaded_file = st.file_uploader("Choose a file", accept_multiple_files=True, type=["csv", "txt"])
     except (EOFError, IOError, OSError) as exception:
         st.error("Could not read file", icon="🚨")
     
@@ -83,14 +83,11 @@ with tab1:
     # Bin size
     bin_size = st.select_slider('Select a bin size for the histogram', factors)
     
-    # Read file
-    if uploaded_file is not None:
-        errors = []
+    def plot_results(data):
         
-        data = read_file(uploaded_file, errors)
-        
+        print(f'data: {data}')
         scatter_container = st.container()
-        
+            
         with scatter_container:
             sct, sct_zoom = st.columns(2)
             
@@ -119,8 +116,19 @@ with tab1:
         plot_histograms(
         d_values, dimensions, filter_dist, binsize=bin_size
         )
+      
+    
+    # Read file
+    if uploaded_file is not None:
+        errors = []
         
-        
+        for file in uploaded_file:
+            print(uploaded_file)
+            
+            dataset = read_file(file, errors)
+            
+            st.header(f'File: {file.name}')
+            plot_results(dataset)
 
 # Tab 2 - About
 with tab2:
